@@ -1,0 +1,65 @@
+package com.javarush.task.task07.task0724;
+
+/* 
+Семейная перепись
+*/
+
+public class Solution {
+    public static void main(String[] args) {
+        Human human1 = new Human("папа Колян", true, 55);
+        Human human2 = new Human("папа Демьян", true, 50);
+        Human human3 = new Human("мама Клара", false, 40);
+        Human human4 = new Human("мама Дуся", false, 45);
+        
+        Human humanA = new Human("Сашенька", true, 20, human1, human3);
+        Human humanB = new Human("Ванечка", true, 22, human2, human4);
+        Human humanC = new Human("Лёшенька", true, 21, human1, human4);
+        Human humanD = new Human("Манечка", false, 25, human2, human3);
+        Human humanE = new Human("Леночка", false, 23, human1, human3);
+        
+        Human[]peoples = {human1, human2, human3, human4, humanA, humanB, humanC, humanD, humanE};
+        
+        for (Human list : peoples) 
+            System.out. println(list);
+    }
+    
+    
+    public static class Human {
+        String name;
+        boolean sex;
+        int age;
+        Human father;
+        Human mother;
+        
+        public Human(String name, boolean sex, int age) {
+            this.name = name;
+            this.sex = sex;
+            this.age = age;
+            this.father = null;
+            this.mother = null;
+        }
+        
+        public Human(String name, boolean sex, int age, Human father, Human mother) {
+            this.name = name;
+            this.sex = sex;
+            this.age = age;
+            this.father = father;
+            this.mother = mother;
+        }
+        
+        public String toString() {
+            String text = "";
+            text += "Имя: " + this.name;
+            text += ", пол: " + (this.sex ? "мужской" : "женский");
+            text += ", возраст: " + this.age;
+
+            if (this.father != null)
+                text += ", отец: " + this.father.name;
+
+            if (this.mother != null)
+                text += ", мать: " + this.mother.name;
+
+            return text;
+        }
+    }
+}
