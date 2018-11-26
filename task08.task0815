@@ -1,0 +1,51 @@
+package com.javarush.task.task08.task0815;
+
+import java.util.HashMap;
+import java.util.HashSet;
+
+/* 
+Перепись населения
+*/
+
+public class Solution {
+    public static HashMap<String, String> createMap() {
+        //"Фамилия" key - "Имя" value
+        HashMap<String, String> map = new HashMap<>();
+        map.put("Иванов", "Иван");
+        map.put("Сидоров", "Сидор");
+        map.put("Петров", "Петр");
+        map.put("Николин", "Николай");
+        map.put("Аленкина", "Алена");
+        map.put("Ленина", "Лена");
+        map.put("Катина", "Катя");
+        map.put("Валерьянов", "Валерьян");
+        map.put("Кузьмин", "Кузьма");
+        map.put("Калинин", "Богдан");
+        return map;
+    }
+
+    public static int getCountTheSameFirstName(HashMap<String, String> map, String name) {
+        int count = 0;
+        
+        for (String key : map.keySet())
+            if (map.get(key).equals(name))
+                count++;
+                
+        return count;
+
+    }
+
+    public static int getCountTheSameLastName(HashMap<String, String> map, String lastName) {
+        int count = 0;
+        
+        for (String key: map.keySet())
+            if (key.equals(lastName))
+                count++;
+        
+        return count;
+    }
+
+    public static void main(String[] args) {
+
+    }
+}
