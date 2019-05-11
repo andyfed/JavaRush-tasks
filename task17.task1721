@@ -1,0 +1,62 @@
+package com.javarush.task.task17.task1721;
+
+import java.io.*;
+import java.nio.CharBuffer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+/* 
+Транзакционность
+*/
+
+public class Solution {
+    public static List<String> allLines = new ArrayList<String>();
+    public static List<String> forRemoveLines = new ArrayList<String>();
+
+    static {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            allLines = Files.readAllLines(Paths.get(br.readLine()));
+            //System.out.println("1 файл: ОК");
+        } catch (IOException e) {
+            e.printStackTrace();
+            //System.out.println("ошибка чтения первого файла");
+        }
+        try {
+            forRemoveLines = Files.readAllLines(Paths.get(br.readLine()));
+            //System.out.println("2 файл: ОК");
+        } catch (IOException e) {
+            e.printStackTrace();
+            //System.out.println("ошибка чтения второго файла");
+        }
+        try {
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+
+
+        try {
+            new Solution().joinData();
+        } catch (CorruptedDataException e) {
+            e.printStackTrace();
+            //System.out.println("ошибка по условию");
+        }
+    }
+
+    public void joinData() throws CorruptedDataException {
+        if (allLines.containsAll(forRemoveLines)) {
+            allLines.removeAll(forRemoveLines);
+            //System.out.println("УСПЕХ");
+        } else {
+            allLines.clear();
+            throw new CorruptedDataException();
+        }
+    }
+}
