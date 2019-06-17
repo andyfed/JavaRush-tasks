@@ -1,0 +1,32 @@
+package com.javarush.task.task18.task1820;
+
+/* 
+Округление чисел
+*/
+
+import java.io.*;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        File file1 = new File(reader.readLine());
+        File file2 = new File(reader.readLine());
+
+        FileInputStream inputStream = new FileInputStream(file1);
+        FileOutputStream outputStream = new FileOutputStream(file2);
+
+        Scanner scanner = new Scanner(inputStream);
+        String s = scanner.nextLine();
+        String[] values = s.split(" ");
+
+        for (String n: values) {
+            int number = Math.round(Float.parseFloat(n));
+            String strNumber = String.valueOf(number);
+            outputStream.write(strNumber.getBytes());
+            outputStream.write((char)32);
+        }
+        inputStream.close();
+        outputStream.close();
+    }
+}
